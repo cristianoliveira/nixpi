@@ -1,0 +1,63 @@
+# tags
+tags
+
+run
+
+# backup files
+*.swp
+
+# powder gem
+.powder
+
+# redis
+dump.rdb
+
+# todo
+.todo
+
+# byebug
+.byebug_history
+
+# osx
+.DS_Store
+
+.ergo
+
+# Local ignored files/folders
+_scripts/
+__/
+.scripts/
+.bin/
+.tmp/
+_tmp/
+# Git worktree
+_wte/
+
+# fzz related
+.watch.yaml
+.fzz
+
+.gitconfig.user
+
+.tool-versions
+
+*.log
+
+nvim-macos/
+
+.env
+
+.local-ngnix.conf
+
+# nix related
+.envrc
+.direnv
+
+# Pono
+pono.toml
+*.bak
+.mark
+
+# Ai related
+.aider*
+.opencode
