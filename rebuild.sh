@@ -1,4 +1,4 @@
 #!/bin/sh
 
-nixos-rebuild switch --flake ~/nixpi#nixos
+sudo nixos-rebuild switch --flake ~/nixpi#nixos
 
