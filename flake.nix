@@ -1,7 +1,7 @@
 {
   description = "Nix flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     utils.url = "github:numtide/flake-utils";
   };
   outputs = { nixpkgs, utils, ... }: {
