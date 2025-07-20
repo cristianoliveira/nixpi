@@ -10,6 +10,8 @@
       modules = [
         ./nix/configuration.nix
         ./nix/developer-tools.nix
+
+        ./nix/pihole-service.nix
       ];
     };
   };
