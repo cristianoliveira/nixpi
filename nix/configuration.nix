@@ -35,10 +35,11 @@ in {
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-  ];
+  # See developer-tools.nix module
+  # environment.systemPackages = with pkgs; [
+  #   vim
+  #   git
+  # ];
 
   services.openssh.enable = true;
 

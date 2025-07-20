@@ -5,6 +5,7 @@ run
 
 # backup files
 *.swp
+*.swo
 
 # powder gem
 .powder
