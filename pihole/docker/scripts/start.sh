@@ -19,4 +19,3 @@ docker run --name pihole \
   --dns=1.1.1.1 --dns=1.0.0.1 \
   --cap-add=NET_ADMIN \
   pihole/pihole:latest
-

@@ -12,6 +12,7 @@
         ./nix/developer-tools.nix
 
         ./nix/pihole-service.nix
+        ./nix/printer-scanner.nix
       ];
     };
   };
