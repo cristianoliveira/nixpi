@@ -7,7 +7,7 @@
   echo "Scanned image saved to $NEW_IMAGE"
  '';
 in {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     scannerScript
   ];
 
