@@ -9,6 +9,8 @@
       system = "aarch64-linux";
       modules = [
         ./nix/configuration.nix
+        ./nix/unfree.nix
+
         ./nix/developer-tools.nix
 
         ./nix/pihole-service.nix

@@ -199,6 +199,3 @@
   required = true
 [init]
   defaultBranch = main
-[user]
-	email = gitconfig@cristianoliveira.dev
-	name = cristianoliveira
