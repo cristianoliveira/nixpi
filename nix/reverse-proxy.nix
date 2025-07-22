@@ -4,6 +4,10 @@
       subdomain = "pihole"; 
       port = "8053";
     }
+    { 
+      subdomain = "printers"; 
+      port = "631";
+    }
   ];
 in {
   services.caddy = {
@@ -11,7 +15,7 @@ in {
 
     # map reduce the hosts
     virtualHosts = builtins.listToAttrs(pkgs.lib.map ({ subdomain, port }: {
-      name = "pihole.nixpi.lab";
+      name = "${subdomain}.nixpi.lab";
       value = {
         useACMEHost = null;  # disables Let's Encrypt/ACME
         

@@ -23,6 +23,7 @@ in {
       browsing = true;
       defaultShared = true;
       openFirewall = true;
+      extraConf = "ServerAlias printers.nixpi.lab";
 
       drivers = [ pkgs.gutenprint ];
     };
