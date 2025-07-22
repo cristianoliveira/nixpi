@@ -16,5 +16,6 @@ docker run --name pihole \
   -v ./etc/pihole:/etc/pihole \
   -v ./etc/dnsmasq.d:/etc/dnsmasq.d \
   --restart unless-stopped \
+  --dns=127.0.0.1 \
   pihole/pihole:latest
 

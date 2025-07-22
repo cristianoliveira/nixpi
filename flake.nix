@@ -11,6 +11,7 @@
         ./nix/configuration.nix
         ./nix/unfree.nix
 
+        ./nix/sysadmin.nix
         ./nix/developer-tools.nix
 
         ./nix/pihole-service.nix
