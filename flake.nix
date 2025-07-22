@@ -11,6 +11,8 @@
         ./nix/configuration.nix
         ./nix/unfree.nix
 
+        ./nix/networking.nix
+
         ./nix/sysadmin.nix
         ./nix/developer-tools.nix
 

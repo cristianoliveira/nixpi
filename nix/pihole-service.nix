@@ -6,17 +6,6 @@
   # FIXME: change this to the correct user
   users.users."cris".extraGroups = [ "docker" ];
 
-  # Open required ports
-  networking.firewall.allowedTCPPorts = [
-    4080    # Pi-hole web interface
-    443   # Pi-hole web interface (HTTPS)
-    53    # DNS
-  ];
-  networking.firewall.allowedUDPPorts = [
-    53    # DNS
-    # 67    # DHCP (if you plan to use Pi-hole as DHCP server)
-  ];
-
   # Optional: Disable systemd-resolved to avoid port 53 conflicts
   services.resolved.enable = false;
 	
