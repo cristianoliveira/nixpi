@@ -13,9 +13,10 @@ docker run --name pihole \
   -e TZ=Europe/Berlin \
   -e FTLCONF_webserver_api_password="$WEBPASS" \
   -e FTLCONF_dns_listeningMode=all \
-  -v ./etc/pihole:/etc/pihole \
-  -v ./etc/dnsmasq.d:/etc/dnsmasq.d \
+  -v /etc/pihole:/etc/pihole \
+  -v /etc/dnsmasq.d:/etc/dnsmasq.d \
   --restart unless-stopped \
   --dns=127.0.0.1 \
+  --dns=1.1.1.1 \
   pihole/pihole:latest
 
