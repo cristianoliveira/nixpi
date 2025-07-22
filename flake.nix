@@ -12,6 +12,7 @@
         ./nix/unfree.nix
 
         ./nix/networking.nix
+        ./nix/reverse-proxy.nix
 
         ./nix/sysadmin.nix
         ./nix/developer-tools.nix
