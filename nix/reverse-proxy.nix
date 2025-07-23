@@ -8,6 +8,10 @@
       subdomain = "printers"; 
       port = "631";
     }
+    { 
+      subdomain = "scanner"; 
+      port = "8054";
+    }
   ];
 in {
   services.caddy = {

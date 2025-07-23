@@ -21,12 +21,11 @@ in {
     wants = [ "network.target" ];
     serviceConfig = {
       ExecStart = ''
-        docker run \
-          --detach \
+        ${pkgs.docker}/bin/docker run \
           --publish 8054:8080 \
           --volume /var/run/dbus:/var/run/dbus \
           --restart unless-stopped \
-          --name scanservjs-container \
+          --name sane-web \
           --privileged sbs20/scanservjs:latest
       '';
       Restart = "always";
