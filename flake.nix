@@ -20,6 +20,7 @@
         ./nix/dotfiles-service.nix
         ./nix/pihole-service.nix
         ./nix/printer-service.nix
+        ./nix/scanner-service.nix
       ];
     };
   };
