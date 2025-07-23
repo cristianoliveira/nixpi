@@ -17,7 +17,7 @@
         ./nix/sysadmin.nix
         ./nix/developer-tools.nix
 
-        ./nix/stow-service.nix
+        ./nix/dotfiles-service.nix
         ./nix/pihole-service.nix
         ./nix/printer-service.nix
       ];
