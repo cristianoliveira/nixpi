@@ -10,7 +10,8 @@ in {
     script = ''
       for file in $(ls -A ${dotfilesDir} | grep -v '*.sh'); do
         echo "Creating symlink for $file"
-        ln -sf ${dotfilesDir}/$file $HOME/$file
+        rm -rf $HOME/$file || echo "nothing to remove"
+        ln -sfn ${dotfilesDir}/$file $HOME/$file
       done
     '';
 
