@@ -6,7 +6,7 @@
     description = "Stow Configuration Service";
 
     script = ''
-      ${pkgs.stow}/bin/stow -d /home/cris/nixpi/stow -t /home/cris
+>>>>>>> 03e0797 (fix: correct stow command)
     '';
 
     wantedBy = [ "multi-user.target" ]; # starts after login
