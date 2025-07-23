@@ -8,15 +8,17 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
       system = "aarch64-linux";
       modules = [
+        # System
         ./nix/configuration.nix
-        ./nix/unfree.nix
-
         ./nix/networking.nix
-        ./nix/reverse-proxy.nix
 
+        # Packages
+        ./nix/unfree.nix
         ./nix/sysadmin.nix
         ./nix/developer-tools.nix
 
+        # Services
+        ./nix/reverse-proxy.nix
         ./nix/dotfiles-service.nix
         ./nix/pihole-service.nix
         ./nix/printer-service.nix
