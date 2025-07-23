@@ -8,11 +8,14 @@ _: {
     80    # Caddy - Reverse proxy
 
     8054  # Sane Web UI
+
+    2049  # NFS server (if you plan to share home storage)
   ];
 
   networking.firewall.allowedUDPPorts = [
     53    # DNS
 
     # 67    # DHCP (if you plan to use Pi-hole as DHCP server)
+    2049  # NFS server (if you plan to share home storage)
   ];
 }

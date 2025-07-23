@@ -23,6 +23,8 @@
         ./nix/pihole-service.nix
         ./nix/printer-service.nix
         ./nix/scanner-service.nix
+        # Share home storage via NFS
+        ./nix/nfs-share.nix
       ];
     };
   };
