@@ -20,6 +20,10 @@ in {
     };
   };
 
+  # Auto mount usb devices
+  services.udisks2.enable = true;
+
+  # SSH server
   services.openssh.enable = true;
 
   users = {

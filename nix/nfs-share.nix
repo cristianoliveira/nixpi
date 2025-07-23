@@ -6,7 +6,7 @@ _:
     # Export /home/cris/storage to all clients with read-write, synchronous writes,
     # no subtree checking, and no root squashing
     exports = ''
-      /run/media/cris/storage 192.168.1.0/24(rw,sync,no_subtree_check,no_root_squash)
+      /run/media/cris/storage 192.168.178.0/24(rw,sync,no_subtree_check,no_root_squash)
     '';
   };
 }
