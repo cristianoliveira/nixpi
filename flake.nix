@@ -19,7 +19,7 @@
 
         ./nix/stow-service.nix
         ./nix/pihole-service.nix
-        ./nix/printer-scanner.nix
+        ./nix/printer-service.nix
       ];
     };
   };
