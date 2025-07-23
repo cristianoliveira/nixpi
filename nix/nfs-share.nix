@@ -1,12 +1,47 @@
-_:
-{
-  # Enable NFS server and export the home storage directory
-  services.nfs.server = {
-    enable = true;
-    # Export /home/cris/storage to all clients with read-write, synchronous writes,
-    # no subtree checking, and no root squashing
-    exports = ''
-      /run/media/cris/storage 192.168.178.0/24(rw,sync,no_subtree_check,no_root_squash)
-    '';
+_: {
+
+  # Exported folders
+  fileSystems."/export/storage" = {
+    device = "/run/media/cris/storage";
+    options = [ "bind" ];
   };
+
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "smbnix";
+        "netbios name" = "smbnix";
+        "security" = "user";
+        #"use sendfile" = "yes";
+        #"max protocol" = "smb2";
+        # note: localhost is the ipv6 localhost ::1
+        "hosts allow" = "192.168.178. 127.0.0.1 localhost";
+        "hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
+      "storage" = {
+        "path" = "/export/storage";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "username";
+        "force group" = "groupname";
+      };
+    };
+  };
+
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
 }
