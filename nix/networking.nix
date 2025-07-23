@@ -6,6 +6,8 @@ _: {
 
     443   # Caddy Pi-hole web interface (HTTPS)
     80    # Caddy - Reverse proxy
+
+    8054  # Sane Web UI
   ];
 
   networking.firewall.allowedUDPPorts = [
