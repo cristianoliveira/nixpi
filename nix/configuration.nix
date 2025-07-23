@@ -1,12 +1,6 @@
-{ config, pkgs, lib, ... }:
-
-let
+{ pkgs, ... }: let
   user = "cris";
   password = "guest";
-  SSID = "mywifi";
-  SSIDpassword = "mypassword";
-  interface = "wlan0";
-  hostname = "nixpi";
 in {
 
   boot = {
@@ -41,6 +35,11 @@ in {
   hardware.enableRedistributableFirmware = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
 
   system.stateVersion = "25.05";
 }

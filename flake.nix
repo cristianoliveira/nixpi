@@ -5,7 +5,7 @@
     utils.url = "github:numtide/flake-utils";
   };
   outputs = { nixpkgs, ... }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         # System
