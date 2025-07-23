@@ -26,21 +26,6 @@ in {
     };
   };
 
-  networking = {
-    hostName = hostname;
-    wireless = {
-      enable = true;
-      networks."${SSID}".psk = SSIDpassword;
-      interfaces = [ interface ];
-    };
-  };
-
-  # See developer-tools.nix module
-  # environment.systemPackages = with pkgs; [
-  #   vim
-  #   git
-  # ];
-
   services.openssh.enable = true;
 
   users = {
