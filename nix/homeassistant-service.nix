@@ -1,28 +1,45 @@
-{ pkgs, ... }: {
-  # Ensure Docker is installed and enabled
+{ pkgs, ... }: let
+  user = "cris";
+in {
+  users.users."${user}".extraGroups = [ "docker" ];
+
   virtualisation.docker.enable = true;
+  virtualisation.oci-containers = {
+    backend = "docker";
 
-  # Add your user to docker group (replace 'username' with your actual username)
-  # FIXME: change this to the correct user
-  users.users."cris".extraGroups = [ "docker" ];
+    containers.homeassistant = {
+      autoStart  = true;
+      privileged = true;
 
-  # FIXME do not expose the password
-  systemd.services.homeassist = {
-    enable = true;
+      image = "ghcr.io/home-assistant/home-assistant:stable";
+      volumes = [
+        "/home/cris/.config/homeassistant:/config"
+        "/run/dbus:/run/dbus:ro"
+      ];
 
-    description = "Home assistant service";
-    after = [ "network.target" "docker.service" ];
-    wants = [ "docker.service" ];
-    requires = [ "docker.service" ];
-    serviceConfig = {
-      Environment="PATH=${pkgs.docker}/bin:$PATH";
+      environment = {
+        TZ = "Europe/Berlin";
+      };
 
-      ExecStart = "/home/cris/homeassitant/service.sh";
-      ExecStop = "docker stop homeassist";
-      ExecStopPost = "docker rm homeassist";
-
-      Restart = "always";
+      networks = [ "host" ];
     };
-    wantedBy = [ "multi-user.target" ];
+  };
+
+  services.linkman = rec {
+    targets = {
+      homeassistant = "~/.config/homeassistant";
+    };
+
+    links = with targets; [
+      # Home assistant
+      {
+        source = ../homeassistant/configuration.yaml;
+        target = "${homeassistant}/configuration.yaml";
+      }
+      {
+        source = ../homeassistant/scenes.yaml;
+        target = "${homeassistant}/scenes.yaml";
+      }
+    ];
   };
 }

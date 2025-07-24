@@ -12,6 +12,10 @@
       subdomain = "scanner"; 
       port = "8054";
     }
+    { 
+      subdomain = "ha"; 
+      port = "8123";
+    }
   ];
 in {
   services.caddy = {

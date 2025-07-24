@@ -10,6 +10,8 @@ _: {
     8054  # Sane Web UI
 
     2049  # NFS server (if you plan to share home storage)
+
+    8123  # Home assistant
   ];
 
   networking.firewall.allowedUDPPorts = [

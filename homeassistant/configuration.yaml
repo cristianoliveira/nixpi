@@ -10,8 +10,9 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-# Example configuration.yaml entry
-rest_command:
-  scanner_request:
-    method: GET 
-    url: "http://srp.fritz.box:6969/scan"
+# allow usage of reverse proxy
+http:
+  use_x_forwarded_for: true
+    trusted_proxies:
+      - 127.0.0.1
+      - nixpi.lab

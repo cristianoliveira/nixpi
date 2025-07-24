@@ -2,8 +2,6 @@ _: let
   targets = {
     "home" = "~/";
     "home_config" = "~/.config";
-
-    homeassitant = "~/.config/homeassitant/";
   };
  in {
   # Manage dotfiles using linkman
@@ -32,16 +30,6 @@ _: let
       {
         source = ../dotfiles/.config/htop;
         target = "${targets.home_config}/htop";
-      }
-
-      # Home assistant
-      {
-        source = ../homeassitant/configuration.yaml;
-        target = targets.homeassitant;
-      }
-      {
-        source = ../homeassitant/scenes.yaml;
-        target = targets.homeassitant;
       }
     ];
 
