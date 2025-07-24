@@ -33,6 +33,7 @@
         ./nix/pihole-service.nix
         ./nix/printer-service.nix
         ./nix/scanner-service.nix
+        ./nix/homeassistant-service.nix
       ];
     };
   };
