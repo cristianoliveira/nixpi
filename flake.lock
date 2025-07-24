@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753339089,
-        "narHash": "sha256-AE99b7rTXJhvWIeQu4UpfLhcQdv5Jj9tRQAnsxlPjAk=",
+        "lastModified": 1753339752,
+        "narHash": "sha256-A6uS3pt5JZ0auXBLJ/v0BG9ZOl4PAHSa5+KgOziJp1U=",
         "owner": "cristianoliveira",
         "repo": "nix-linkman",
-        "rev": "6e721ac0fab484501a7eecb9b67fc5c1623ed42f",
+        "rev": "9c15c4bdbe26f351021c64f83781414f51122d37",
         "type": "github"
       },
       "original": {
