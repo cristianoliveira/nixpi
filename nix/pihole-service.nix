@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+_: {
   # Ensure Docker is installed and enabled
   virtualisation.docker.enable = true;
 
@@ -8,29 +8,35 @@
 
   # Optional: Disable systemd-resolved to avoid port 53 conflicts
   services.resolved.enable = false;
-	
-  # FIXME do not expose the password
-  systemd.services.pihole = {
-    enable = true;
 
-    description = "Pi-hole Docker Container";
-    after = [ "network.target" "docker.service" ];
-    wants = [ "docker.service" ];
-    requires = [ "docker.service" ];
-    serviceConfig = {
-      Environment="PATH=${pkgs.docker}/bin:$PATH";
-      EnvironmentFile="/etc/pihole/environment";
+  virtualisation.oci-containers.containers.pihole = {
+    autoStart   = true;
+    image       = "pihole/pihole:latest";
 
-      ExecStart = "/opt/pihole/scripts/start.sh";
-      ExecStop = "docker stop pihole";
-      ExecStopPost = "/opt/pihole/scripts/stop.sh";
+    ports       = [
+      "53:53/tcp"
+      "53:53/udp"
+      "8053:80/tcp"
+    ];
 
-      Restart = "always";
+    environment = {
+      TZ                             = "Europe/Berlin";
+      # read WEBPASS from your build‐env; you can also hard‑code or use environmentFiles
+      FTLCONF_webserver_api_password = builtins.getEnv "WEBPASS";
+      FTLCONF_dns_listeningMode      = "all";
     };
-    wantedBy = [ "multi-user.target" ];
+
+    volumes = [
+      "/etc/pihole:/etc/pihole"
+      "/etc/dnsmasq.d:/etc/dnsmasq.d"
+    ];
+
+    extraOptions = [
+      "--dns=127.0.0.1"
+      "--dns=1.1.1.1"
+    ];
   };
 
-  # Create necessary folders
   systemd.tmpfiles.rules = [
     "d /var/lib/pihole/etc-pihole 0755 root root"
     "d /var/lib/pihole/etc-dnsmasq.d 0755 root root"
