@@ -14,23 +14,13 @@ in {
   ## === Scanner ===
   hardware.sane.enable = true;
 
-  ## === Sane Web UI ===
-  systemd.services.sane-web = {
-    description = "Sane Web UI";
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    serviceConfig = {
-      ExecStart = ''
-        ${pkgs.docker}/bin/docker run \
-          --publish 8054:8080 \
-          --volume /var/run/dbus:/var/run/dbus \
-          --restart unless-stopped \
-          --name sane-web \
-          --privileged sbs20/scanservjs:latest
-      '';
-      Restart = "always";
+  virtualisation.oci-containers = {
+    containers.sane-web = {
+      autoStart    = true;
+      privileged   = true;
+      image        = "sbs20/scanservjs:latest";
+      ports        = [ "8054:8080" ];
+      volumes      = [ "/var/run/dbus:/var/run/dbus" ];
     };
-
-    wantedBy = [ "multi-user.target" ];
   };
 }
