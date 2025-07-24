@@ -8,12 +8,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { nixpkgs, linkman, ... }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+  outputs = { nixpkgs, linkman, ... }: let
       system = "aarch64-linux";
+  in {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+      inherit system;
+
       modules = [
         # Linkman
-        linkman.nixosModules.linkman
+        linkman.nixosModules."${system}".linkman
 
         # System
         ./nix/configuration.nix
