@@ -3,7 +3,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     utils.url = "github:numtide/flake-utils";
-    linkman.url = "github:cristianoliveira/nix-linkman";
+    linkman = {
+      url = "github:cristianoliveira/nix-linkman";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { nixpkgs, linkman, ... }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
