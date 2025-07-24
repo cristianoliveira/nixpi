@@ -1,27 +1,32 @@
-{ pkgs ? import <nixpkgs> {}, ... }: let
-  dotfilesDir = ../dotfiles; # This path is moved to the nix store
-in {
+_: {
+  # Manage dotfiles using linkman
+  services.linkman = {
+    enable = true;
 
-  # Run dotfiles on login to apply symlinks
+    links = [
+      { 
+        source = ../dotfiles/.bashrc;
+        target = "./.bashrc";
+      }
+      {
+        source = ../dotfiles/.bash_profile;
+        target = "./.bash_profile";
+      }
+      {
+        source = ../dotfiles/.vimrc;
+        target = "./.vimrc";
+      }
+      {
+        source = ../dotfiles/.gitconfig;
+        target = "./.gitconfig";
+      }
+      {
+        source = ../dotfiles/.config/htop;
+        target = "./.config/htop";
+      }
+    ];
 
-  systemd.services.dotfiles = {
-    description = "Configuration Service";
-
-    script = ''
-      for file in $(ls -A ${dotfilesDir} | grep -v '*.sh'); do
-        echo "Creating symlink for $file"
-        rm -rf $HOME/$file || echo "nothing to remove"
-        ln -sfn ${dotfilesDir}/$file $HOME/$file
-      done
-    '';
-
-    wantedBy = [ "multi-user.target" ]; # starts after login
-    serviceConfig = {
-      User = "cris";
-      Group = "users";
-      Type = "simple";
-      Restart = "always";
-      RestartSec = "60m";
-    };
+    user = "cris";
+    group = "users";
   };
 }

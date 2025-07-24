@@ -3,11 +3,15 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     utils.url = "github:numtide/flake-utils";
+    linkman.url = "github:cristianoliveira/nix-linkman";
   };
-  outputs = { nixpkgs, ... }: {
+  outputs = { nixpkgs, linkman, ... }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
+        # Linkman
+        linkman.nixosModules.linkman
+
         # System
         ./nix/configuration.nix
         ./nix/networking.nix
