@@ -26,6 +26,7 @@ in {
       };
 
       networks = [ "host" ];
+      user     = "cris:users";
     };
   };
 
