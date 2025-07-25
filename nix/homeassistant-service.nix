@@ -13,7 +13,7 @@ in {
 
       image = "ghcr.io/home-assistant/home-assistant:stable";
       volumes = [
-        "/home/cris/.config/homeassistant:/config"
+        "/home/${user}/.config/homeassistant:/config"
         "/run/dbus:/run/dbus:ro"
       ];
 
@@ -33,11 +33,11 @@ in {
     links = with targets; [
       # Home assistant
       {
-        source = ../homeassistant/configuration.yaml;
+        source = "/home/${user}/nixpi/homeassistant/configuration.yaml";
         target = "${homeassistant}/configuration.yaml";
       }
       {
-        source = ../homeassistant/scenes.yaml;
+        source = "/home/${user}/nixpi/homeassistant/scenes.yaml";
         target = "${homeassistant}/scenes.yaml";
       }
     ];
