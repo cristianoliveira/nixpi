@@ -1,4 +1,4 @@
-_: {
+{ pkgs }: {
   # Ensure Docker is installed and enabled
   virtualisation.docker.enable = true;
 
@@ -41,4 +41,19 @@ _: {
     "d /var/lib/pihole/etc-pihole 0755 root root"
     "d /var/lib/pihole/etc-dnsmasq.d 0755 root root"
   ];
+
+  ## Cron that updates pihole with 'pihole -g' every day
+  systemd.services.pihole-update = {
+    description = "Update Pi-hole gravity";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.docker}/bin/docker exec pihole pihole -g";
+      RemainAfterExit = true;
+    };
+    timerConfig = {
+      OnCalendar = "*-*-* 02:00:00"; # Every day at 2 AM
+      Persistent = true;
+    };
+  };
 }
