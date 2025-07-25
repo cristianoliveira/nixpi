@@ -2,7 +2,7 @@ let
   user = "cris";
 
   targets = {
-    homeassistant = "/home/${user}/.config/homeassistant";
+    home_config = "/home/${user}/.config";
   };
 in {
   users.users."${user}".extraGroups = [ "docker" ];
@@ -17,7 +17,7 @@ in {
 
       image = "ghcr.io/home-assistant/home-assistant:stable";
       volumes = [
-        "${targets.homeassistant}:/config"
+        "${targets.home_config}/homeassistant:/config"
         "/run/dbus:/run/dbus:ro"
       ];
 
@@ -26,22 +26,16 @@ in {
       };
 
       networks = [ "host" ];
-      user     = "cris:users";
     };
   };
 
   services.linkman = rec {
-    inherit targets;
-
-    links = with targets; [
+    copies = with targets; [
       # Home assistant
       {
-        source = "/home/${user}/nixpi/homeassistant/configuration.yaml";
-        target = "${homeassistant}/configuration.yaml";
-      }
-      {
-        source = "/home/${user}/nixpi/homeassistant/scenes.yaml";
-        target = "${homeassistant}/scenes.yaml";
+        source = "/home/${user}/nixpi/homeassistant";
+        target = "${home_config}";
+        recursive = true;
       }
     ];
   };
