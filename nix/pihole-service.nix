@@ -1,4 +1,4 @@
-{ pkgs }: {
+{ pkgs, ... }: {
   # Ensure Docker is installed and enabled
   virtualisation.docker.enable = true;
 
@@ -51,9 +51,17 @@
       ExecStart = "${pkgs.docker}/bin/docker exec pihole pihole -g";
       RemainAfterExit = true;
     };
+  };
+  systemd.timers.pihole-update = {
+    description = "Timer for Pi-hole gravity update";
+    wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "*-*-* 02:00:00"; # Every day at 2 AM
+      OnCalendar = "daily";
       Persistent = true;
+    };
+    unitConfig = {
+      Requires = "pihole-update.service";
+      After = "pihole-update.service";
     };
   };
 }
