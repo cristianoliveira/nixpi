@@ -1,5 +1,9 @@
-{ pkgs, ... }: let
+let
   user = "cris";
+
+  targets = {
+    homeassistant = "/home/${user}/.config/homeassistant";
+  };
 in {
   users.users."${user}".extraGroups = [ "docker" ];
 
@@ -13,7 +17,7 @@ in {
 
       image = "ghcr.io/home-assistant/home-assistant:stable";
       volumes = [
-        "/home/${user}/.config/homeassistant:/config"
+        "${targets.homeassistant}:/config"
         "/run/dbus:/run/dbus:ro"
       ];
 
@@ -26,9 +30,7 @@ in {
   };
 
   services.linkman = rec {
-    targets = {
-      homeassistant = "~/.config/homeassistant";
-    };
+    inherit targets;
 
     links = with targets; [
       # Home assistant
